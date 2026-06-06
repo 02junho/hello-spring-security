@@ -32,10 +32,13 @@ public class SecurityConfig {
                 .requestMatchers("/", "/login", "/signup",
                                  "/css/**", "/js/**", "/images/**", "/favicon.ico").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
-                .requestMatchers("/products/add", "/products/*/delete").hasRole("ADMIN")
+                // 상품 등록/삭제/수정은 관리자 전용 (/products/*/edit 신규 추가)
+                .requestMatchers("/products/add", "/products/*/delete", "/products/*/edit").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/products").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
+            // 권한 부족(403) 시 커스텀 접근 거부 페이지로 이동
+            .exceptionHandling(ex -> ex.accessDeniedPage("/access-denied"))
             .formLogin(form -> form
                 .loginPage("/login")
                 .defaultSuccessUrl("/home", true)

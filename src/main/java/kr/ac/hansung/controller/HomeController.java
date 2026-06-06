@@ -34,4 +34,10 @@ public class HomeController {
         model.addAttribute("roles", roles);
         return "home";
     }
+
+    // 권한 부족(403) 시 SecurityConfig 의 accessDeniedPage 설정에 의해 매핑되는 화면
+    @GetMapping("/access-denied")
+    public String accessDenied() {
+        return "access-denied";
+    }
 }
