@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<!-- 공통 푸터 fragment: 모든 페이지 하단에 실습 수행 일시 + 학번 + 성명 표시 -->
+<footer th:fragment="footer"
+        style="text-align:center; padding:20px; background-color:#f8f9fa; border-top:1px solid #dee2e6; margin-top:30px;">
+    <p style="margin:0; font-size:14px; color:#333;">
+        <span>학번: 2171080 &nbsp;|&nbsp; 성명: 신준호 &nbsp;|&nbsp; </span>
+        <span th:text="${'실습 수행: ' + #temporals.format(#temporals.createNow(), 'yyyy년 MM월 dd일 (E) a hh:mm:ss')}"></span>
+    </p>
+</footer>
+</body>
+</html>
